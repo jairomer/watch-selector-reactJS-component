@@ -12,11 +12,39 @@ import TopBar from './top_bar/TopBar';
 
 class App extends Component {
 
-  state = {
-    productData: ProductData,
-    currentPreviewImagePos: 0,
-    currentRenderedFeaturePos: 0,
-    showHeartbeat: true,
+  constructor(props) {
+    /* This will be called on component creation. */
+    super(props);
+
+    this.state = {
+      productData: ProductData,
+      currentPreviewImagePos: 0,
+      currentRenderedFeaturePos: 0,
+      showHeartbeat: true,
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // Only render the component if that state has changed.
+    if (nextState.currentPreviewImagePos === this.state.currentPreviewImagePos &&
+        nextState.currentRenderedFeaturePos === this.state.currentRenderedFeaturePos) {
+      console.log("Component did not update.");
+      return false;
+    }
+
+    return true;
+  }
+
+  componentDidMount() {
+    console.log("Component did mount");
+  }
+
+  componentWillUnmount() {
+    console.log("Component will unmount");
+  }
+
+  componentDidUpdate() {
+    console.log("Inside ComponentDidUpdate");
   }
 
   onColorOptionClick = (pos) => {
